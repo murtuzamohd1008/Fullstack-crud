@@ -23,7 +23,7 @@ const Login = () => {
                 headers:{'Content-Type':'application/json'},
                 withCredentials:true
             })
-              handleCurrent()
+              await handleCurrent()
             setUser({
                 email:'',
                 password:''
@@ -39,7 +39,7 @@ const Login = () => {
                 autoClose:true,
                 theme:'colored'
             })
-            console.log(error)
+            console.log(error.message)
         }
     }
   return (

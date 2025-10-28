@@ -27,14 +27,22 @@ const Update = () => {
         headers:{'Content-Type':'application/json'},
         withCredentials:true
       })
-    await gettodo()
+
+      if(result.data.success==true){
+            await gettodo()
     navigate('/')
-    toast.success("todo has been updated",{
+    toast.success(result.data.message,{
       autoClose:true,
       theme:'colored'
     })
+      }
+   
     } catch (error) {
-      
+      console.log(error);
+      toast.error(error.response.data.message,{
+        autoClose:true,
+        theme:"colored"
+      })
     }
   }
   return (

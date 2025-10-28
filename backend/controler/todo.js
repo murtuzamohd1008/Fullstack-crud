@@ -45,6 +45,10 @@ export const getTodo=async (req,res)=>{
         })
     } catch (error) {
         console.log(error.message)
+        return res.status(500).json({
+            success:false,
+            message:"server error"
+        })
     }
 }
 
@@ -58,6 +62,10 @@ export const deleteTodo = async (req, res) => {
         })
     } catch (error) {
          console.log(error)
+         return res.json({
+            success:false,
+            message:"server error"
+         })
     }
 }
 

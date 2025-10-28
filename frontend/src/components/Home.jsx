@@ -20,16 +20,20 @@ const Home = () => {
             withCredentials:true
          }
         )
-       await gettodo()
-        setTodo('');
-       toast.success('todo added successfully',{
+      
+       if(result.data.success==true){
+             await gettodo()
+           setTodo('');
+       toast.success(result.data.message,{
         autoClose:true,
         theme:'colored'
        })
+       }
+       
       
        
       } catch (error) {
-         toast.error('todo not added yed',{
+         toast.error('error.response.data.message',{
         autoClose:true,
         theme:'colored'
        })
@@ -39,13 +43,18 @@ const Home = () => {
   const hsndleDelete=async(id)=>{
     try {
          let result=await axios.delete(`http://localhost:7000/deletetodo/${id}`,{withCredentials:true})
-         console.log(result)
-         gettodo()
-         toast.success("todo has been deleted",{
+         if(result.data.success==true){
+              await gettodo()
+         toast.success(result.data.message,{
             theme:'colored',
             autoClose:true
          })
+         }
     } catch (error) {
+        toast.error(error.responce.data.message,{
+               theme:'colored',
+            autoClose:true
+        })
         console.log(error)
     }
   }

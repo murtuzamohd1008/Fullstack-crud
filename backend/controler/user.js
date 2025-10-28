@@ -3,7 +3,8 @@ import { User } from "../model/user.js";
 import bcrypt from 'bcrypt'
 
 export const signup = async (req, res) => {
-  const { name, email, password } = req.body;
+  try {
+     const { name, email, password } = req.body;
   if (!name || !email || !password) {
     return res.status(400).json(
       {
@@ -38,10 +39,20 @@ export const signup = async (req, res) => {
     user: newUser,
     message: "user account created successfully"
   })
+  } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        success:false,
+        message:"server error"
+      })
+  }
+ 
 }
 
 export const login = async (req, res) => {
-  const { email, password } = req.body
+  try {
+    console.log("hello")
+     const { email, password } = req.body
   if (!email || !password) {
     return res.status.json({
       success: false,
@@ -77,13 +88,22 @@ export const login = async (req, res) => {
     message: "user logged in successfully",
       user:existUser
   })
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success:false,
+      message:"server error"
+    })
+  }
+  
 }
 
 export const getCurrentUser=async(req,res)=>{
   try {
     let token=req.cookies.token;
     return res.status(200).json({
-      success:true,token:token
+      success:true,
+      token:token
     })
   } catch (error) {
     console.log(error)
